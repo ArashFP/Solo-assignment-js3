@@ -67,8 +67,13 @@ const AuthContextProvider = ({ children }) => {
           
         } catch (err) {
           console.log(err.message);
-          const message = err.code.split('/')[1].replace(/-/g, ' ')
-          toast.error(message || err.message, { id: toastId })
+          let message;
+          if (err.code) {
+            message = err.code.split('/')[1].replace(/-/g, ' ')
+          } else {
+            message = err.message;
+          }
+          toast.error(message, { id: toastId })
         }
       }
 
